@@ -1,11 +1,11 @@
 <?php 
 
+namespace Acme\Eloquent;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Container\Container as App;
 
 use Acme\Contracts\RepositoryInterface;
-
-namespace Acme\Eloquent;
 
 abstract class Repository implements RepositoryInterface
 {
@@ -26,8 +26,8 @@ abstract class Repository implements RepositoryInterface
 	{
 		$model = $this->app->make($this->model());
 
-		if (!$model instanceof Model) {
-			throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+		if (!($model instanceof Model)) {
+			throw new Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
 		}
 
 		return $this->model = $model;
